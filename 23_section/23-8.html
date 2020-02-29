@@ -1,0 +1,38 @@
+<html>
+
+<body>
+    <h2>자식 컴포넌트 참조 $refs</h2>
+    <div id="app">
+        <comp-child ref="child"></comp-child>
+        <button v-on:click="clickChildMethod">click go</button>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var bus = new Vue({
+        data: {
+            count: 0
+        }
+    });
+
+    Vue.component('comp-child', {
+        template: '<p>this is child</p>',
+        created: function () {
+            this.$on('open', function () {
+                console.log('this is child action wawawa');
+            })
+        }
+    })
+
+    new Vue({
+        el: '#app',
+        methods: {
+            clickChildMethod: function () {
+                this.$refs.child.$emit('open');
+            }
+        }
+    })
+</script>
+
+</html>

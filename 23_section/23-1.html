@@ -1,0 +1,29 @@
+<html>
+
+<body>
+    <h2>부모에서 자식으로 속성명을 써서 데이터 전달하기</h2>
+    <div id="app">
+        <my-component></my-component>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    // comp-child 는 my-component의 자식 컴포넌트가 되겄슴다
+    Vue.component('my-component', {
+        template: '<p><comp-child val="자식놈 test11"></comp-child><comp-child val="자식놈 test22"></comp-child></p>'
+    });
+
+    // 부모에서 자식으로 값을 넘겨줄때는 "props" 옵션 사용
+    // 그래서 자식에선 props 옵션으로 어떤 값을 받을지 정함
+    Vue.component('comp-child', {
+        template: '<p>{{ val }}</p>',
+        props: ['val']
+    })
+
+    new Vue({
+        'el': '#app'
+    })
+</script>
+
+</html>

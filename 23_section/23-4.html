@@ -1,0 +1,67 @@
+<html>
+
+<body>
+    <h2>props로 받을 자료형 지정하기</h2>
+    <div id="app">
+        <ul>
+            <comp-child v-bind:prop-a="propA" v-bind:prop-b="propB" v-bind:prop-c="propC" v-bind:prop-c="propD"
+                v-bind:prop-e="propE" v-bind:prop-f="propF">
+            </comp-child>
+        </ul>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    Vue.component('comp-child', {
+        template: '<ul><li>{{propA}}</li><li>{{propB}}</li><li>{{propC}}</li><li>{{propD}}</li><li>{{propE}}</li><li>{{propF}}</li></ul>',
+        // props 로 받을 자료형을 따로 지정할 수 있음
+        // 이 외의 값이 들어온다면 에러 ㅌㅌㅌ
+        props: {
+            propA: Number,
+            propB: [String, Number],
+            propC: {
+                type: String,
+                required: true
+            },
+            propD: {
+                type: Number,
+                default: 100
+            },
+            propE: {
+                type: Object,
+                default: function () {
+                    return {
+                        message: 'object return message gogo'
+                    }
+                }
+            },
+            propF: {
+                validator: function (value) {
+                    if (value > 10) {
+                        return 'TRUE!!!';
+                    } else {
+                        return 'FALSE!!!!';
+                    }
+                }
+            }
+        }
+    })
+
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                propA: 1,
+                propB: 'bbb',
+                propC: 'aaaaa',
+                propE: {
+                    message: 'nope'
+                },
+                propF: 500
+            }
+        }
+    })
+</script>
+
+</html>

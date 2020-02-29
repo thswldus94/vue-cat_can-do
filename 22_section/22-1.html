@@ -1,0 +1,26 @@
+<html>
+
+<body>
+    <h2>컴포넌트 만들어보기</h2>
+    <div id="app">
+        <my-component></my-component>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    // 컴포넌트는 항상 root 인스턴스가 생기기 전에 정의해야 함
+    Vue.component('my-component', {
+        template: '<p>Hi hello anyeong</p>'
+    });
+
+    new Vue({
+        el: '#app',
+        // 이렇게 쓰면 지역선언
+        // component: {
+        //     'my-component': myComponent
+        // }
+    })
+</script>
+
+</html>

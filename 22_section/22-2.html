@@ -1,0 +1,35 @@
+<html>
+
+<body>
+    <h2>동적 메시지를 출력할 수 있는 컴포넌트 만들어보기</h2>
+    <div id="app">
+        <my-component></my-component>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    // 컴포넌트는 항상 root 인스턴스가 생기기 전에 정의해야 함
+    Vue.component('my-component', {
+        // 템플릿 부분은 반드시 하나의 태그로 싸여 있어야 함
+        // <span>aaa</span><p>test</p> 는 불가능
+        template: '<p>{{ message }}</p>',
+        // data 부분은 반드시 함수로 리턴되어야 함
+        // 이유는 여ㅓ개 컴포넌트 인스턴스에서 같은 객체를 참조 상태가 되는것을 방지하기 위해
+        data: function () {
+            return {
+                message: 'this is new data value'
+            }
+        }
+    });
+
+    new Vue({
+        el: '#app',
+        // 이렇게 쓰면 지역선언
+        // component: {
+        //     'my-component': myComponent
+        // }
+    })
+</script>
+
+</html>

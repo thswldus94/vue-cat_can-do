@@ -1,0 +1,53 @@
+<html>
+
+<body>
+    <h2>컴포는트 리스트 렌더링 / props 강제변경 해보기</h2>
+    <div id="app">
+        <ul>
+            <comp-child v-for="monster in monsters" v-bind:key="monster.id" v-bind:name="monster.name"
+                v-bind:hp="monster.hp"></comp-child>
+        </ul>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    Vue.component('comp-child', {
+        template: '<li>{{ name }}, HP: {{ hp }} \
+        <button v-on:click="doAttack">공격하기 버튼인데 이거 누르면 warning날걸?</button></li>',
+        props: ['name', 'hp'],
+        methods: {
+            // 이 메소드가 실행된다면 vue warning 이 날것이여
+            // 왜냐면 props 데이터는 함부로 변경할 수 없음 부모를 거스르겠다...는말이냐!!!
+            doAttack: function () {
+                this.hp = this.hp - 50;
+            }
+        }
+    })
+
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                monsters: [{
+                        id: 1,
+                        name: '슬라임',
+                        hp: 300
+                    },
+                    {
+                        id: 2,
+                        name: '주황버섯',
+                        hp: 500
+                    },
+                    {
+                        id: 3,
+                        name: '달팽이',
+                        hp: 100
+                    }
+                ]
+            }
+        }
+    })
+</script>
+
+</html>
